@@ -33,6 +33,7 @@ let code = `
 
 <style>
 * {font-family: sans-serif;} 
+body {display: flex; flex-direction: column-reverse;
 .block {border: 1px solid #444; padding: 2em;margin:1em;} 
 .tag {background: yellow; font-size: .8em;}
 img {max-width: 80%;max-height: 80%}
@@ -78,8 +79,21 @@ if (_code) code = _code
 
 textarea.value = code
 textarea.onkeydown = (e) => {
-		if (e.key == "Enter" && (e.metaKey || e.altKey || e.ctrlKey) ) {
-			run()
+	if (e.key == "Enter" && (e.metaKey || e.altKey || e.ctrlKey) ) {
+		run()
+	}
+	if (e.key == 'Tab') {
+			e.preventDefault();
+			let start = textarea.selectionStart;
+			let end = textarea.selectionEnd;
+
+			// set textarea value to: text before caret + tab + text after caret
+			textarea.value = textarea.value.substring(0, start) +
+				"\t" + textarea.value.substring(end);
+
+			// put caret at right position again
+			textarea.selectionStart =
+			textarea.selectionEnd = start + 1;
 		}
 }
 
