@@ -1,0 +1,75 @@
+<title>Draft</title>
+<style>
+	*{padding: 0; margin: 0; box-sizing: border-box;}
+	body {
+		display: grid;
+		grid-template-rows: 5vh 95vh;
+		font-family: sans-serif;
+	}
+
+	.container {
+		display: grid;
+		grid-template-columns: 50vw 50vw;
+	}
+
+	iframe {
+	  outline: none;
+		all: unset;
+	}
+
+	.container > * {
+		margin: 1.5em;
+		min-width: 80%;
+		min-height: 80%;
+		background: #eee;
+	}
+
+	textarea {
+		width: 90%;
+		height: 70%;
+		padding: 2em;
+	  border: none;
+		outline: none;
+	}
+
+	.control-bar {
+		padding: 1.5em;
+	}
+
+	.control-bar > *{
+		margin-right: .5em;
+	}
+
+	button, input {
+		all: unset;
+		cursor: pointer;
+		border: 1px solid #444;
+		padding: .1em;
+	}
+
+
+	button:hover, input:hover {
+	  background: black;
+		color: white;
+	}
+
+	span {font-family: monospace;background: #fef;padding: .1em}
+
+
+</style>
+<body>
+	<div class="control-bar">
+		<input type="text" id="link-input" placeholder="enter are.na slug"></input>
+		<button id="load-btn">load channel</button>
+		<button id="run-btn">run</button>
+		<span>(CTRL/CMD/OPT/ALT + Enter) <strong>to run</strong></span>
+
+	</div>
+	<div class="container">
+		<textarea></textarea>
+		<iframe
+			<!-- style="width: calc(50vw - 4em); height: calc(95vh - 4em);" -->
+			></iframe>
+	</div>
+</body>
+<script src="./script.js" type="module"></script>
