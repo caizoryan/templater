@@ -3,7 +3,7 @@ import {compile_file} from "./main.js"
 let slug = "list-are-na-api-possibilities"
 let channel 
 
-let get_channel = (slug) => fetch("https://api.are.na/v2/channels/" + slug.trim())
+let get_channel = (slug) => fetch("https://api.are.na/v2/channels/" + slug.trim() + "?per=100")
 		.then((res) => res.json())
 		.then((res) => channel = res)
 		.then((res) => run())
@@ -35,6 +35,7 @@ let code = `
 * {font-family: sans-serif;} 
 .block {border: 1px solid #444; padding: 2em;margin:1em;} 
 .tag {background: yellow; font-size: .8em;}
+img {max-width: 80%;max-height: 80%}
 </style>
 
 <h1>
@@ -45,14 +46,26 @@ let code = `
 %% for (let block of channel.contents){ %%
  
  <div class="block">
-
+   <span>%%+block.class%%</span>
    <h4>
     %%if (tags)%% <span class='tag'>block.id</span>
-    #%%+block.id%%
+    %%+block.id%%
    </h4> 
+
 
    %%if (block.class == "Text") {%%
      %%+block.content_html%%
+   %% } %%
+   
+  %%if (block.class == "Image") {%%
+    <img src="%%+block.image.display.url%%"></img>
+   %% } %%
+
+  %%if (block.class == "Link") {%%
+    <img src="%%+block.image.display.url%%"></img>
+    <a href="%%+block.source.url%%">
+      <p>%%+block.source.url%%</p>
+    </a>
    %% } %%
   </div>
 
