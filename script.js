@@ -13,11 +13,19 @@ get_channel(slug)
 let textarea = document.querySelector("textarea")
 
 let loadbtn = document.querySelector("#load-btn")
+let savebtn = document.querySelector("#save-btn")
+savebtn.onclick = () => {
+	run()
+	localStorage.setItem("input.html", code)
+}
+
 let linkinput = document.querySelector("#link-input")
 loadbtn.onclick = () => get_channel(linkinput.value.trim())
 
 let runbtn = document.querySelector("#run-btn")
 runbtn.onclick = () => run()
+
+
 
 let iframe = document.querySelector("iframe")
 let code = `
@@ -51,6 +59,10 @@ let code = `
 
 %% } %%
 `
+
+let _code = localStorage.getItem("input.html")
+if (_code) code = _code
+
 textarea.value = code
 textarea.onkeydown = (e) => {
 		if (e.key == "Enter" && (e.metaKey || e.altKey || e.ctrlKey) ) {
