@@ -6,14 +6,21 @@ let channel
 let get_channel = (slug) => fetch("https://api.are.na/v2/channels/" + slug.trim() + "?per=100")
 		.then((res) => res.json())
 		.then((res) => channel = res)
-		.then((res) => run())
+		.then((_) => run())
 
 get_channel(slug)
 
 let textarea = document.querySelector("textarea")
-
+let container = document.querySelector(".container")
 let loadbtn = document.querySelector("#load-btn")
 let savebtn = document.querySelector("#save-btn")
+
+let toggleeditorbtn = document.querySelector("#toggle-editor-btn")
+toggleeditorbtn.onclick = () => {
+	let attr = container.getAttribute("editor") == "visible" ? "hidden" : "visible"
+	container.setAttribute("editor", attr)
+}
+
 savebtn.onclick = () => {
 	run()
 	localStorage.setItem("input.html", code)
@@ -24,8 +31,6 @@ loadbtn.onclick = () => get_channel(linkinput.value.trim())
 
 let runbtn = document.querySelector("#run-btn")
 runbtn.onclick = () => run()
-
-
 
 let iframe = document.querySelector("iframe")
 let code = `

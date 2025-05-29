@@ -19,10 +19,18 @@
 	}
 
 	.container > * {
-		margin: 1.5em;
-		min-width: 80%;
+		margin: 1em;
+		min-width: 95%;
 		min-height: 80%;
 		background: #eee;
+	}
+
+	.container[editor="hidden"] {
+		grid-template-columns: 0 100vw;
+	}
+
+	.container[editor="hidden"] > textarea {
+		visibility: hidden;
 	}
 
 	textarea {
@@ -48,7 +56,6 @@
 		padding: .1em;
 	}
 
-
 	button:hover, input:hover {
 	  background: black;
 		color: white;
@@ -64,10 +71,11 @@
 		<button id="load-btn">load channel</button>
 		<button id="run-btn">run</button>
 		<button id="save-btn">save</button>
+		<button id="toggle-editor-btn">toggle editor</button>
 		<span>(CTRL/CMD/OPT/ALT + Enter) <strong>to run</strong></span>
 
 	</div>
-	<div class="container">
+	<div class="container" editor="visible">
 		<textarea></textarea>
 		<iframe
 			<!-- style="width: calc(50vw - 4em); height: calc(95vh - 4em);" -->
